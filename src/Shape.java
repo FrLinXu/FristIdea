@@ -16,8 +16,9 @@ abstract  class Shape {
     }
 
     @Override
-    public String toString() {
-        return super.toString();
+    public boolean equals(Object obj) {
+        if (this == obj || this.getClass() == obj.getClass()) return  true ;
+        return false;
     }
 
     public abstract double getPerimeter();  //返回图形的周长
@@ -47,6 +48,9 @@ class Ponit {
         System.out.println(res);
         return res ;
     }
+    public boolean samePoint (Ponit t ) {
+        return this.x == t.x && this.y==t.y ;
+    }
 }
 
 class  Circle extends  Shape{
@@ -73,6 +77,23 @@ class  Circle extends  Shape{
     @Override
     public void move(int x, int y) {
         p.move(x,y);
+    }
+
+    @Override
+    public String toString() {
+        return "我是圆心为"+p.toString()+"半径为"+r+"的圆";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean flag =  super.equals(obj);
+        if (flag){
+            Circle c = (Circle) obj;
+            if (c.r != this.r || !this.p.samePoint(c.p)){
+                flag =false ;
+            }
+        }
+        return flag ;
     }
 }
 class  Triangle extends Shape {
@@ -111,6 +132,21 @@ class  Triangle extends Shape {
         p2.move(x,y);
         p3.move(x,y);
     }
+    @Override
+    public boolean equals(Object obj) {
+        boolean flag =  super.equals(obj);
+        if (flag){
+            Triangle c = (Triangle) obj;
+            if (!this.p1.samePoint(c.p1) || !this.p2.samePoint(c.p2)|| !this.p3.samePoint(c.p3)){
+                flag =false ;
+            }
+        }
+        return flag ;
+    }
+    @Override
+    public String toString() {
+        return "我是顶点为"+p1.toString()+","+p2.toString()+","+p3.toString()+"的三角形";
+    }
 }
 class  Rectangle  extends Shape  {
 
@@ -135,8 +171,24 @@ class  Rectangle  extends Shape  {
     }
 
     @Override
+    public String toString() {
+        return "我是对角顶点为"+p1.toString() + ","+p2.toString() +"的长方形";
+    }
+
+    @Override
     public void move(int x, int y) {
         p1.move(x,y);
         p2.move(x,y);
+    }
+    @Override
+    public boolean equals(Object obj) {
+        boolean flag =  super.equals(obj);
+        if (flag){
+            Rectangle c = (Rectangle) obj;
+            if (!this.p1.samePoint(c.p1) || !this.p2.samePoint(c.p2)){
+                flag =false ;
+            }
+        }
+        return flag ;
     }
 }
