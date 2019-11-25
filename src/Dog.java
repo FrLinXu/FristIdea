@@ -72,5 +72,20 @@ public class Dog
 	}
 }
 class  LargeDog extends Dog {
+	private  double  weight ;
+	LargeDog (String name , String color , double age , double weight) {
+		this.setDog(name ,color ,age);
+		this.weight = weight ;
+	}
+	LargeDog (double weight){
+		this.weight = weight ;
+	}
 
+	public double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
 }
